@@ -1,0 +1,43 @@
+body {
+  background-color: $color-violet-dark;
+}
+
+.background {
+  padding-top: 7rem;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(
+      rgba($color: $color-violet-dark, $alpha: 0.8),
+      rgba($color: $color-violet-dark, $alpha: 1) 90%
+    ),
+    url(../img/bg.png) center/cover no-repeat;
+}
+
+.playlist-section {
+  --col-num: 6;
+  --col-space: 3rem;
+  color: $color-white;
+  padding: 1rem 0;
+
+  @include responsive(desktop) {
+    --col-num: 4;
+  }
+  @include responsive(mobile) {
+    --col-num: 2;
+  }
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0 calc(var(--col-space) / -2);
+    overflow: hidden;
+
+    @include responsive(mobile) {
+      overflow: scroll;
+    }
+  }
+}

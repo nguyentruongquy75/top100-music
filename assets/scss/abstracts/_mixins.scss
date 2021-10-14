@@ -1,0 +1,26 @@
+@mixin responsive($device) {
+  @if $device == desktop {
+    @media (max-width: 64em) {
+      @content;
+    }
+  } @else if $device == tablet {
+    @media (max-width: 48em) {
+      @content;
+    }
+  } @else if $device == mobile {
+    @media (max-width: 30em) {
+      @content;
+    }
+  } @else if $device == mobile-small {
+    @media (max-width: 20em) {
+      @content;
+    }
+  }
+}
+
+@mixin limitLine($line) {
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

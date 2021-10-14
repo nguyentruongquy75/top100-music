@@ -1,0 +1,160 @@
+.song-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 9rem;
+  display: flex;
+  padding: 0 2rem;
+  background-color: #120c1c;
+  display: none;
+
+  &--display {
+    display: flex;
+  }
+
+  .song-info {
+    display: flex;
+    flex: 0 0 25rem;
+    align-items: center;
+
+    @include responsive(mobile) {
+      flex: 0 0 20rem;
+    }
+
+    @include responsive(mobile-small) {
+      flex: 0 0 15rem;
+    }
+
+    .song-img {
+      --size: 6rem;
+      height: var(--size);
+      width: var(--size);
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid $color-text-secondary;
+      margin-right: 0.8rem;
+      flex-shrink: 0;
+
+      &--rotate {
+        animation: rotating 12s linear infinite;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .song-name {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: $color-white;
+      @include limitLine(1);
+    }
+
+    .song-singer {
+      font-size: 1.2rem;
+      color: $color-text-secondary;
+      margin-top: 0.2rem;
+      @include limitLine(1);
+    }
+  }
+
+  .song-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    &__container {
+      font-size: 2rem;
+      color: $color-white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__item {
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    .song-control__item + .song-control__item {
+      margin-left: 1.4rem;
+    }
+
+    &__play {
+      font-size: 4rem;
+
+      .pause {
+        display: none !important;
+      }
+
+      &--playing {
+        .play {
+          display: none;
+        }
+        .pause {
+          display: inline-block !important;
+        }
+      }
+    }
+
+    &__random,
+    &__repeat {
+      color: $color-text-secondary;
+      &--active {
+        color: $color-white;
+      }
+      @include responsive(mobile) {
+        display: none;
+      }
+    }
+
+    &__progress {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+
+      &__track {
+        width: 26rem;
+        height: 4px;
+        margin: 0 1.2rem;
+        background-color: $color-text-secondary;
+        display: flex;
+
+        @include responsive(mobile) {
+          display: none;
+        }
+
+        &:hover {
+          height: 5px;
+          cursor: pointer;
+        }
+      }
+
+      &__lower {
+        background-color: $color-white;
+        width: 0;
+      }
+    }
+
+    &__current-time {
+      color: $color-text-secondary;
+
+      @include responsive(mobile) {
+        display: none;
+      }
+    }
+
+    &__song-time {
+      color: $color-white;
+      @include responsive(mobile) {
+        display: none;
+      }
+    }
+  }
+}

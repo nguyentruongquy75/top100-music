@@ -2,4 +2,20 @@
   width: 120rem;
   max-width: 100%;
   margin: 0 auto;
+
+  @include responsive(desktop) {
+    width: 80rem;
+  }
+
+  @include responsive(tablet) {
+    width: 70rem;
+  }
+
+  @include responsive(mobile) {
+    width: 34rem;
+  }
+
+  @include responsive(mobile-small) {
+    width: 30rem;
+  }
 }

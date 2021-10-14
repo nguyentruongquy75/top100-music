@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top 100 Nhạc Trẻ</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/main.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <script defer type="module" src="./assets/js/controller.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="wrapper header__container">
+        <div class="header__search">
+          <div class="header__search-input">
+            <div class="header__search-input-icon">
+              <i class="fas fa-search"></i>
+            </div>
+
+            <div class="header__search-input-container">
+              <input
+                type="text"
+                placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV…"
+              />
+            </div>
+          </div>
+
+          <div class="header__search-result">
+            <ul class="header__search-result__list">
+              <li class="header__search-result__item">
+                <div class="header__search-result__item-icon">
+                  <i class="fas fa-search"></i>
+                </div>
+                <span class="header__search-result__item-name">adele</span>
+              </li>
+
+              <li class="header__search-result__item">
+                <div class="header__search-result__item-icon">
+                  <i class="fas fa-search"></i>
+                </div>
+                <span class="header__search-result__item-name">adele</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main">
+      <div class="wrapper">
+        <section class="detail-section">
+          <div class="detail-column">
+            <div class="playlist-img">
+              <img src="./assets/img/top100.jpg" alt="" />
+              <div class="playlist-img-icon">
+                <i class="far fa-play-circle"></i>
+              </div>
+            </div>
+
+            <div class="playlist-info">
+              <h1 class="playlist-name">
+                Top 100 <span class="playlist-desc__name"></span> hay nhất
+              </h1>
+              <div class="playlist-update">
+                Cập nhật
+                <span class="playlist-update-date">10/10/2021</span>
+              </div>
+
+              <div class="btn btn--violet random-btn">Phát ngẫu nhiên</div>
+            </div>
+          </div>
+          <div class="detail-column">
+            <p class="playlist-desc">
+              Top 100 Nhạc <span class="playlist-desc__name"></span> là danh
+              sách 100 ca khúc hot nhất hiện tại của thể loại Top 100 Nhạc Pop
+              Âu Mỹ, được Zing MP3 tự động tổng hợp dựa trên thông tin số liệu
+              lượt nghe và lượt chia sẻ của từng bài hát trên phiên bản web và
+              phiên bản Mobile. Dữ liệu sẽ được lấy trong 30 ngày gần nhất và
+              được cập nhật liên tục.
+            </p>
+            <div class="songs">
+              <div class="songs__title">
+                <span>Bài hát</span>
+                <span>Thời gian</span>
+              </div>
+
+              <ul class="song__list"></ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="song-player">
+      <audio src="./assets/music/1.m4a" hidden></audio>
+      <div class="song-info">
+        <div class="song-img">
+          <img src="./assets/img/bg.png" alt="" />
+        </div>
+        <div>
+          <span class="song-name"
+            >Rồi tới luôn gffadadada dasdadas dasdsdsd</span
+          >
+          <span class="song-singer">Naidada dfdf sfsdsd sfsdsds</span>
+        </div>
+      </div>
+
+      <div class="song-control">
+        <div class="song-control__container">
+          <div class="song-control__item song-control__random">
+            <i class="fas fa-random"></i>
+          </div>
+
+          <div class="song-control__item song-control__backward">
+            <i class="fas fa-step-backward"></i>
+          </div>
+
+          <div class="song-control__item song-control__play">
+            <i class="far fa-play-circle play"></i>
+            <i class="far fa-pause-circle pause"></i>
+          </div>
+
+          <div class="song-control__item song-control__forward">
+            <i class="fas fa-step-forward"></i>
+          </div>
+
+          <div class="song-control__item song-control__repeat">
+            <i class="fas fa-redo"></i>
+          </div>
+        </div>
+
+        <div class="song-control__progress">
+          <span class="song-control__current-time">0:00</span>
+          <div class="song-control__progress__track">
+            <div class="song-control__progress__lower">&nbsp;</div>
+            <!-- <div class="song-control__progress__upper">&nbsp;</div> -->
+          </div>
+          <span class="song-control__song-time"></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
