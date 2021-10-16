@@ -213,6 +213,22 @@ class Player {
 
 export const player = new Player();
 
-document.querySelector(".playlist-img").addEventListener("click", () => {
-  player.playSong();
+const searchInput = document.querySelector(".header__search-input");
+
+searchInput.addEventListener("focusin", function () {
+  const headerSearch = document.querySelector(".header__search");
+
+  headerSearch.classList.add("header__search--searching");
+});
+
+searchInput.addEventListener("focusout", function () {
+  const headerSearch = document.querySelector(".header__search");
+
+  headerSearch.classList.remove("header__search--searching");
+});
+
+const searchResultList = document.querySelector(".header__search-result__list");
+
+searchResultList.addEventListener("mousedown", (e) => {
+  e.preventDefault();
 });

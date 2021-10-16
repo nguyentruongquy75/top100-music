@@ -8,14 +8,26 @@
 
   &__container {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     height: 100%;
   }
 
+  &__nav {
+    font-size: 2.2rem;
+    color: $color-white;
+    cursor: pointer;
+
+    a {
+      display: inline-block;
+      padding: 1rem;
+    }
+  }
+
   &__search {
-    flex-basis: 70%;
+    flex-basis: 50%;
     position: relative;
+    margin: 0 auto;
 
     @include responsive(mobile) {
       flex-basis: 80%;
@@ -72,14 +84,44 @@
       border-bottom-right-radius: 2rem;
       display: none;
 
+      &__message {
+        text-align: center;
+      }
+
       &__item {
-        display: flex;
-        align-items: center;
         padding: 0.8rem 1rem;
         border-radius: 0.6rem;
-        &-icon {
-          color: #ffffff80;
+
+        &-link {
+          display: flex;
+          align-items: center;
+        }
+
+        &-img {
+          --size: 4rem;
+          width: var(--size);
+          height: var(--size);
           margin-right: 0.8rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        &-name {
+          display: block;
+          font-size: 1.4rem;
+          font-weight: 500;
+          color: $color-white;
+          @include limitLine(1);
+        }
+
+        &-singer {
+          font-size: 1.2rem;
+          color: $color-text-secondary;
+          @include limitLine(1);
         }
 
         &:hover {

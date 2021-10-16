@@ -28,13 +28,33 @@ body {
   &__title {
     font-size: 2rem;
     margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+
+    .slider-control {
+      display: flex;
+      margin-left: auto;
+      font-size: 2.4rem;
+
+      @include responsive(mobile) {
+        display: none;
+      }
+
+      &__item {
+        padding: 0.8rem 1.2rem;
+        cursor: pointer;
+      }
+
+      .slider-control__next {
+        margin-left: 1.2rem;
+      }
+    }
   }
 
   &__list {
     display: flex;
     flex-wrap: nowrap;
     margin: 0 calc(var(--col-space) / -2);
-    overflow: hidden;
 
     @include responsive(mobile) {
       overflow: scroll;

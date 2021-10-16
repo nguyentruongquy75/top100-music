@@ -7,6 +7,7 @@ class AlbumView {
     const htmls = dataObj.songs.map((value, index) =>
       callback(category, value, index)
     );
+    targetElement.innerHTML = "";
     htmls.forEach((html) => {
       targetElement.insertAdjacentHTML("beforeend", html);
     });
@@ -33,7 +34,6 @@ class AlbumView {
   }
 
   renderDetail(data) {
-    console.log(data);
     const playlistName = document.querySelectorAll(".playlist-desc__name");
     playlistName.forEach((value) => {
       value.textContent = data.name;
@@ -44,8 +44,7 @@ class AlbumView {
          <audio src="${value.music}" hidden></audio>
         <div class="song__item-left">
           <div class="song__item-icon">
-            <i class="fas fa-music"></i>
-            <input type="checkbox" name="test" />
+            <i class="fas fa-music"></i>          
           </div>
 
           <div class="song__item-img">

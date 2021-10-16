@@ -2,7 +2,8 @@ import { api } from "./config";
 import { view } from "./views/albumView";
 import { player } from "./views/event";
 import { model } from "./model";
-
+import { Slider } from "./views/slider";
+import { Search } from "./views/search";
 model.getData(api).then(() => {
   const path = location.pathname;
   if (path === "/" || path.includes("index.html")) {
@@ -10,11 +11,35 @@ model.getData(api).then(() => {
     view.renderAlbums(".playlist--CA .playlist-section__list", model.getCA());
     view.renderAlbums(".playlist--KL .playlist-section__list", model.getKL());
     view.renderAlbums(".playlist--VN .playlist-section__list", model.getVN());
+
+    //Init sldier
+    new Slider({
+      container: ".playlist--VN .playlist-section__list",
+      prev: ".playlist--VN .slider-control__prev",
+      next: ".playlist--VN .slider-control__next",
+    }).init();
+
+    new Slider({
+      container: ".playlist--CA .playlist-section__list",
+      prev: ".playlist--CA .slider-control__prev",
+      next: ".playlist--CA .slider-control__next",
+    }).init();
+
+    new Slider({
+      container: ".playlist--AM .playlist-section__list",
+      prev: ".playlist--AM .slider-control__prev",
+      next: ".playlist--AM .slider-control__next",
+    }).init();
+
+    new Slider({
+      container: ".playlist--KL .playlist-section__list",
+      prev: ".playlist--KL .slider-control__prev",
+      next: ".playlist--KL .slider-control__next",
+    }).init();
   } else if (path.includes("detail.html")) {
     const search = location.search;
     const category = search.slice(search.indexOf("=") + 1, search.indexOf("&"));
     const playlistIndex = search.slice(search.lastIndexOf("=") + 1);
-    console.log(playlistIndex);
     const randomBtn = document.querySelector(".random-btn");
     let songs = null;
     switch (category) {
@@ -81,6 +106,7 @@ model.getData(api).then(() => {
         const song = songs[playlistIndex].songs[index];
         playlistImg.src = song.avatar;
         player.render(song, index);
+        player.playSong();
       });
     });
 
@@ -91,6 +117,27 @@ model.getData(api).then(() => {
       player.playSong();
     });
   }
+
+  const dataSearch = [];
+
+  Object.entries(model.getAllSong()).forEach(([key, value]) => {
+    const data = value.map((item, index) => {
+      item.name = `Top 100 Bài hát ${item.name} hay nhất`;
+      item.category = key.slice(key.indexOf("_") + 1);
+      item.index = index;
+      return item;
+    });
+    dataSearch.push(...data);
+  });
+  new Search(
+    {
+      searchInput: ".header__search-input-container input",
+      searchResult: ".header__search-result__list",
+      searchResultItem: ".header__search-result__item",
+      searchMessage: ".header__search-result__message",
+    },
+    dataSearch
+  );
 });
 //Change hash
 
