@@ -89,6 +89,13 @@ class AlbumView {
         seconds < 10 ? "0" + seconds : seconds
       }`;
     });
+
+    audio.addEventListener("error", () => {
+      item.classList.add("song__item--error");
+      item.querySelector(".song__item-time").innerHTML = ` <div class="error">
+          <i class="fas fa-exclamation"></i>
+        </div>`;
+    });
   }
 }
 

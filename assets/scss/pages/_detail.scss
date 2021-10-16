@@ -141,6 +141,14 @@
         padding: 0.8rem;
         border-radius: 0.6rem;
 
+        &--error {
+          .song__item-time {
+            .error {
+              display: block;
+            }
+          }
+        }
+
         &--active {
           background-color: rgba($color: $color-white, $alpha: 0.1);
         }
@@ -333,6 +341,12 @@
 
           @include responsive(mobile) {
             display: none;
+          }
+
+          .error {
+            display: none;
+            font-size: 1.8rem;
+            color: red;
           }
         }
       }

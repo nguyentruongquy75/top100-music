@@ -208,6 +208,22 @@ class Player {
       nextSong();
       this.playSong();
     });
+
+    // Load start
+    audio.addEventListener("loadstart", () => {
+      this.#element.play.classList.add("song-control__play--loading");
+      this.#element.play.classList.remove("song-control__play--error");
+    });
+
+    // Load end
+    audio.addEventListener("loadedmetadata", () => {
+      this.#element.play.classList.remove("song-control__play--loading");
+    });
+
+    audio.addEventListener("error", () => {
+      this.#element.play.classList.remove("song-control__play--loading");
+      this.#element.play.classList.add("song-control__play--error");
+    });
   }
 }
 
