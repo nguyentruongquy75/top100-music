@@ -13,6 +13,18 @@ class AlbumView {
     });
   }
 
+  #renderOffset(targetSelector, dataObj, callback, page, length) {
+    const targetElement = document.querySelector(targetSelector);
+    const category = dataObj?.category;
+    const songs = dataObj.songs.slice(page * length, page * length + length);
+    const htmls = songs.map((value, index) =>
+      callback(category, value, index + page * length)
+    );
+    htmls.forEach((html) => {
+      targetElement.insertAdjacentHTML("beforeend", html);
+    });
+  }
+
   renderAlbums(targetSelector, dataArr = {}) {
     this.render(targetSelector, dataArr, (category, value, index) => {
       return `
@@ -33,13 +45,18 @@ class AlbumView {
     });
   }
 
-  renderDetail(data) {
+  renderDetail(data, page, length) {
     const playlistName = document.querySelectorAll(".playlist-desc__name");
     playlistName.forEach((value) => {
-      value.textContent = data.name;
+      value.textContent = data.name.includes("Top")
+        ? data.name
+        : `Top 100 ${data.name} hay nhất`;
     });
-    this.render(".song__list", data, (_, value, index) => {
-      return `
+    this.#renderOffset(
+      ".song__list",
+      data,
+      (_, value, index) => {
+        return `
         <li class="song__item" data-index ="${index}">
          <audio src="${value.music}" hidden></audio>
         <div class="song__item-left">
@@ -71,7 +88,10 @@ class AlbumView {
       </li>
         
         `;
-    });
+      },
+      page,
+      length
+    );
     const songItems = document.querySelectorAll(".song__item");
     songItems.forEach((item) => {
       this.#renderSongTime(item);
@@ -80,6 +100,7 @@ class AlbumView {
 
   #renderSongTime(item) {
     const audio = item.querySelector("audio");
+
     audio.addEventListener("loadeddata", () => {
       const songTime = audio.duration;
       const minute = Math.trunc(songTime / 60);

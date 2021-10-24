@@ -65,8 +65,41 @@ model.getData(api).then(() => {
       player.playSong();
     });
 
-    view.renderDetail(songs[playlistIndex]);
+    // Load
+    const length = 10;
+    let currentPage = 0;
+    const totalPage = Math.ceil(songs[playlistIndex].songs.length / length) - 1;
+    const songList = document.querySelector(".song__list");
+    songList.innerHTML = "";
+    view.renderDetail(songs[playlistIndex], currentPage, length);
     const songItems = document.querySelectorAll(".song__item");
+
+    let lastSongItem = songList.lastElementChild;
+
+    //optimize load
+
+    const observe = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            currentPage++;
+            if (currentPage > totalPage) {
+              observe.observe(lastSongItem);
+            } else {
+              view.renderDetail(songs[playlistIndex], currentPage, length);
+              observe.unobserve(lastSongItem);
+              lastSongItem = songList.lastElementChild;
+              observe.observe(lastSongItem);
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.8,
+      }
+    );
+
+    observe.observe(lastSongItem);
 
     // Init player
     player.init(
@@ -96,19 +129,30 @@ model.getData(api).then(() => {
     );
 
     // Click on song Item
+    songList.addEventListener("click", (e) => {
+      const songItem = e.target.closest(".song__item");
+      const index = songItem.dataset.index;
+      const playlistImg = document.querySelector(".playlist-img img");
 
-    songItems.forEach((item) => {
-      item.addEventListener("click", function () {
-        const index = +this.dataset.index;
-        const playlistImg = document.querySelector(".playlist-img img");
-
-        // Change playlist image
-        const song = songs[playlistIndex].songs[index];
-        playlistImg.src = song.avatar;
-        player.render(song, index);
-        player.playSong();
-      });
+      // Change playlist image
+      const song = songs[playlistIndex].songs[index];
+      playlistImg.src = song.avatar;
+      player.render(song, index);
+      player.playSong();
     });
+
+    // songItems.forEach((item) => {
+    //   item.addEventListener("click", function () {
+    //     const index = +this.dataset.index;
+    //     const playlistImg = document.querySelector(".playlist-img img");
+
+    //     // Change playlist image
+    //     const song = songs[playlistIndex].songs[index];
+    //     playlistImg.src = song.avatar;
+    //     player.render(song, index);
+    //     player.playSong();
+    //   });
+    // });
 
     document.querySelector(".playlist-img").addEventListener("click", () => {
       if (!location.hash.slice(1)) {

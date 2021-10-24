@@ -33,6 +33,9 @@ class Player {
     this.#element.audio = document.querySelector(audio);
     this.#addEvent();
 
+    // preload
+    this.#element.audio.preload = "audio";
+
     // Playlist
     this.#playlist = playlist;
   }
@@ -43,7 +46,7 @@ class Player {
       this.#element.container.classList.add("song-player--display");
     }
     // Current index
-    this.#currentIndex = index;
+    this.#currentIndex = +index;
 
     this.#element.audio.src = song.music;
     this.#element.songImg.src = song.avatar;
@@ -101,9 +104,7 @@ class Player {
             this.#history[this.#historyIndex]
           );
         } else {
-          const nextIndex = Math.floor(
-            Math.random() * this.#playlist.length + 1
-          );
+          const nextIndex = Math.floor(Math.random() * this.#playlist.length);
           this.render(this.#playlist[nextIndex], nextIndex);
           this.#history.push(nextIndex);
         }
@@ -228,6 +229,8 @@ class Player {
 }
 
 export const player = new Player();
+
+// search
 
 const searchInput = document.querySelector(".header__search-input");
 
